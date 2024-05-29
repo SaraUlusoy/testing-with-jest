@@ -8,7 +8,7 @@ jest.setTimeout(1000 * 60 * 5); // 5 minuter
 
 // Det här körs innan vi kör testerna för att säkerställa att Firefox är igång
 beforeAll(async () => {
-console.log(fileUnderTest);
+    console.log(fileUnderTest);
     driver = await new Builder().forBrowser('firefox').build();
     await driver.get(fileUnderTest);
 });
@@ -19,17 +19,18 @@ afterAll(async() => {
 }, defaultTimeout);
 
 test('The stack should be empty in the beginning', async () => {
-	let stack = await driver.findElement(By.id('top_of_stack')).getText();
-	 // Ändra det förväntade värdet så att testet misslyckas
-	expect(stack).toEqual("n/a");
+    let stack = await driver.findElement(By.id('top_of_stack')).getText();
+    // Återställ det förväntade värdet så att testet går igenom
+    expect(stack).toEqual("n/a");
 });
 
 describe('Clicking "Pusha till stacken"', () => {
-	it('should open a prompt box', async () => {
-		let push = await driver.findElement(By.id('push'));
-		await push.click();
-		let alert = await driver.switchTo().alert();
-		await alert.sendKeys("Bananer");
-		await alert.accept();
-	});
+    it('should open a prompt box', async () => {
+        let push = await driver.findElement(By.id('push'));
+        await push.click();
+        let alert = await driver.switchTo().alert();
+        await alert.sendKeys("Bananer");
+        await alert.accept();
+    });
 });
+
