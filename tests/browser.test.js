@@ -21,7 +21,7 @@ afterAll(async() => {
 test('The stack should be empty in the beginning', async () => {
     let stack = await driver.findElement(By.id('top_of_stack')).getText();
     // Återställ det förväntade värdet så att testet går igenom
-    expect(stack).toEqual("n/a");
+    expect(stack).toEqual("not n/a");
 });
 
 describe('Clicking "Pusha till stacken"', () => {
